@@ -14,11 +14,11 @@ export function ProductCard({
   return <Card className="bg-card border-border hover:shadow-lg transition-shadow group">
       <CardHeader className="p-4 relative">
         <img src={product.image || "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=200&fit=crop"} alt={product.name} className="w-full h-48 object-cover rounded-lg" />
-        {/* 产品编号徽章 */}
-        {product.product_code && <div className="absolute top-4 left-4">
-            <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm text-foreground border-border">
-              <Hash className="w-3 h-3 mr-1" />
-              {product.product_code}
+        {/* 产品类别徽章 - 替换原来的产品编号 */}
+        {product.category && <div className="absolute top-4 left-4">
+            <Badge variant="secondary" className="bg-primary/90 backdrop-blur-sm text-primary-foreground border-border">
+              <Tag className="w-3 h-3 mr-1" />
+              {product.category}
             </Badge>
           </div>}
       </CardHeader>
@@ -31,11 +31,11 @@ export function ProductCard({
           {product.model && <p className="text-sm text-muted-foreground mt-1">{product.model}</p>}
         </div>
 
-        {/* 产品分类和供应商信息 */}
+        {/* 产品编号和供应商信息 */}
         <div className="flex flex-wrap gap-2">
-          {product.category && <Badge variant="outline" className="text-xs">
-              <Tag className="w-3 h-3 mr-1" />
-              {product.category}
+          {product.product_code && <Badge variant="outline" className="text-xs">
+              <Hash className="w-3 h-3 mr-1" />
+              {product.product_code}
             </Badge>}
           {product.supplier && <Badge variant="outline" className="text-xs">
               <Box className="w-3 h-3 mr-1" />
