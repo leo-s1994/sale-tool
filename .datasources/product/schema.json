@@ -1,0 +1,79 @@
+
+{
+  "name": "product",
+  "title": "产品管理",
+  "schemas": [
+    {
+      "name": "product_code",
+      "title": "产品编号",
+      "type": "String"
+    },
+    {
+      "name": "name",
+      "title": "产品名称",
+      "type": "String"
+    },
+    {
+      "name": "supplier",
+      "title": "厂商/供应商",
+      "type": "String"
+    },
+    {
+      "name": "category",
+      "title": "产品分类",
+      "type": "String"
+    },
+    {
+      "name": "model",
+      "title": "产品型号",
+      "type": "String"
+    },
+    {
+      "name": "description",
+      "title": "产品文字描述",
+      "type": "MultiLineString"
+    },
+    {
+      "name": "short_description",
+      "title": "简化描述",
+      "type": "String"
+    },
+    {
+      "name": "price",
+      "title": "价格",
+      "type": "Number"
+    },
+    {
+      "name": "image",
+      "title": "产品图片",
+      "type": "Image"
+    },
+    {
+      "name": "pdf_url",
+      "title": "PDF文档链接",
+      "type": "Url"
+    },
+    {
+      "name": "specifications",
+      "title": "技术规格",
+      "type": "Array",
+      "items": {
+        "type": "String"
+      }
+    },
+    {
+      "name": "notes",
+      "title": "备注",
+      "type": "MultiLineString"
+    },
+    {
+      "name": "related_products",
+      "title": "关联产品",
+      "type": "Array",
+      "items": {
+        "type": "String"
+      }
+    }
+  ]
+}
+  
