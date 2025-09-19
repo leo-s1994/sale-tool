@@ -5,6 +5,8 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 
 // @ts-ignore;
 import { useForm } from 'react-hook-form';
+import { ImageUpload } from '@/components/ImageUpload';
+import { PDFUpload } from '@/components/PDFUpload';
 export function ProductForm({
   product,
   onSubmit,
@@ -164,6 +166,30 @@ export function ProductForm({
               <FormMessage />
             </FormItem>} />
         
+        {/* 产品图片上传 */}
+        <FormField control={form.control} name="image" render={({
+        field
+      }) => <FormItem>
+              <FormLabel>产品图片</FormLabel>
+              <FormControl>
+                <ImageUpload value={field.value} onChange={field.onChange} onRemove={() => field.onChange('')} />
+              </FormControl>
+              <FormDescription>上传产品展示图片，支持 JPG, PNG, GIF 格式</FormDescription>
+              <FormMessage />
+            </FormItem>} />
+        
+        {/* PDF文档上传 */}
+        <FormField control={form.control} name="pdf_url" render={({
+        field
+      }) => <FormItem>
+              <FormLabel>PDF文档</FormLabel>
+              <FormControl>
+                <PDFUpload value={field.value} onChange={field.onChange} onRemove={() => field.onChange('')} />
+              </FormControl>
+              <FormDescription>上传产品资料PDF文档，支持在线查看</FormDescription>
+              <FormMessage />
+            </FormItem>} />
+        
         {/* 产品文字描述 */}
         <FormField control={form.control} name="description" render={({
         field
@@ -184,29 +210,6 @@ export function ProductForm({
                 <Input placeholder="输入简化的产品描述" {...field} />
               </FormControl>
               <FormDescription>用于卡片显示的简短描述</FormDescription>
-              <FormMessage />
-            </FormItem>} />
-        
-        {/* 产品图片URL */}
-        <FormField control={form.control} name="image" render={({
-        field
-      }) => <FormItem>
-              <FormLabel>产品图片URL</FormLabel>
-              <FormControl>
-                <Input placeholder="输入产品图片URL" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>} />
-        
-        {/* PDF文档URL */}
-        <FormField control={form.control} name="pdf_url" render={({
-        field
-      }) => <FormItem>
-              <FormLabel>PDF文档URL</FormLabel>
-              <FormControl>
-                <Input placeholder="输入PDF文档URL" {...field} />
-              </FormControl>
-              <FormDescription>支持在线查看的PDF文档链接</FormDescription>
               <FormMessage />
             </FormItem>} />
         
