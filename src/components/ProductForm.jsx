@@ -1,7 +1,7 @@
 // @ts-ignore;
 import React, { useState, useEffect } from 'react';
 // @ts-ignore;
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Textarea, Button, useToast, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Badge, X } from '@/components/ui';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Textarea, Button, useToast, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
 
 // @ts-ignore;
 import { useForm } from 'react-hook-form';
@@ -16,12 +16,9 @@ export function ProductForm({
   const {
     toast
   } = useToast();
-  const [relatedProducts, setRelatedProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState('');
-  const [productNote, setProductNote] = useState('');
   const [existingModels, setExistingModels] = useState([]);
 
-  // 模拟获取关联产品数据
+  // 模拟获取产品数据用于型号关联
   useEffect(() => {
     // 这里应该从API获取产品列表
     const mockProducts = [{
@@ -37,7 +34,6 @@ export function ProductForm({
       name: '存储设备',
       model: 'DS1821+'
     }];
-    setRelatedProducts(mockProducts);
 
     // 提取所有型号用于关联选择
     const models = mockProducts.map(p => p.model).filter(Boolean);
@@ -57,7 +53,6 @@ export function ProductForm({
       pdf_url: '',
       specifications: [],
       notes: '',
-      related_products: [],
       model_associations: []
     }
   });
@@ -68,42 +63,6 @@ export function ProductForm({
     const random = Math.random().toString(36).substr(2, 5);
     return `PROD-${timestamp}-${random}`.toUpperCase();
   }
-
-  // 添加关联产品
-  const addRelatedProduct = () => {
-    if (!selectedProduct) return;
-    const currentRelatedProducts = form.getValues('related_products') || [];
-    const productExists = currentRelatedProducts.some(item => item.productId === selectedProduct);
-    if (productExists) {
-      toast({
-        title: "提示",
-        description: "该产品已关联",
-        variant: "default"
-      });
-      return;
-    }
-    const newRelatedProduct = {
-      productId: selectedProduct,
-      note: productNote.trim()
-    };
-    const updatedRelatedProducts = [...currentRelatedProducts, newRelatedProduct];
-    form.setValue('related_products', updatedRelatedProducts);
-    setSelectedProduct('');
-    setProductNote('');
-  };
-
-  // 移除关联产品
-  const removeRelatedProduct = productId => {
-    const currentRelatedProducts = form.getValues('related_products') || [];
-    const updatedRelatedProducts = currentRelatedProducts.filter(item => item.productId !== productId);
-    form.setValue('related_products', updatedRelatedProducts);
-  };
-
-  // 获取产品名称
-  const getProductName = productId => {
-    const product = relatedProducts.find(p => p.id === productId);
-    return product ? product.name : '未知产品';
-  };
   const handleSubmit = async data => {
     try {
       // 确保产品编号不为空
@@ -269,50 +228,6 @@ export function ProductForm({
               <FormDescription>用于卡片显示的简短描述</FormDescription>
               <FormMessage />
             </FormItem>} />
-        
-        {/* 关联产品选择器 */}
-        <FormItem>
-          <FormLabel>关联产品</FormLabel>
-          <div className="space-y-3">
-            {/* 选择关联产品 */}
-            <div className="flex gap-3">
-              <Select value={selectedProduct} onValueChange={setSelectedProduct}>
-                <SelectTrigger className="flex-1">
-                  <SelectValue placeholder="选择关联产品" />
-                </SelectTrigger>
-                <SelectContent>
-                  {relatedProducts.map(prod => <SelectItem key={prod.id} value={prod.id}>
-                      {prod.name}
-                    </SelectItem>)}
-                </SelectContent>
-              </Select>
-              
-              <Input placeholder="关联备注（可选）" value={productNote} onChange={e => setProductNote(e.target.value)} className="flex-1" />
-              
-              <Button type="button" onClick={addRelatedProduct} disabled={!selectedProduct}>
-                添加
-              </Button>
-            </div>
-            
-            {/* 已选择的关联产品列表 */}
-            <div className="space-y-2">
-              {form.watch('related_products')?.map((item, index) => <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex-1">
-                    <div className="font-medium">{getProductName(item.productId)}</div>
-                    {item.note && <div className="text-sm text-muted-foreground mt-1">
-                        备注: {item.note}
-                      </div>}
-                  </div>
-                  <Button type="button" variant="ghost" size="icon" onClick={() => removeRelatedProduct(item.productId)} className="h-8 w-8">
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>)}
-            </div>
-          </div>
-          <FormDescription>
-            选择其他产品作为关联产品，可以为每个关联产品添加备注信息
-          </FormDescription>
-        </FormItem>
         
         {/* 备注 */}
         <FormField control={form.control} name="notes" render={({
