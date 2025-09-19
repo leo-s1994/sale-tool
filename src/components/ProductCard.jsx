@@ -51,11 +51,9 @@ export function ProductCard({
         {/* 价格和操作按钮 */}
         <div className="flex items-center justify-between pt-2">
           <div className="flex-1">
-            {showPrice ? <div className="space-y-1">
+            {showPrice && <div className="space-y-1">
                 <span className="text-2xl font-bold text-primary">¥{product.price}</span>
                 {product.price && <p className="text-xs text-muted-foreground">含税价格</p>}
-              </div> : <div className="h-10 flex items-center">
-                <span className="text-sm text-muted-foreground">价格已隐藏</span>
               </div>}
           </div>
           <div className="flex space-x-2">
