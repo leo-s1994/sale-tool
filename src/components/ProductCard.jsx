@@ -13,8 +13,8 @@ export function ProductCard({
 }) {
   return <Card className="bg-card border-border hover:shadow-lg transition-shadow group">
       <CardHeader className="p-4 relative">
-        <img src={product.image || "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=200&fit=crop"} alt={product.name} className="w-full h-48 object-cover rounded-lg" />
-        {/* 产品类别徽章 - 替换原来的产品编号 */}
+        <img src={product.image || "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=200&fit=crop"} alt={product.model || '产品图片'} className="w-full h-48 object-cover rounded-lg" />
+        {/* 产品类别徽章 */}
         {product.category && <div className="absolute top-4 left-4">
             <Badge variant="secondary" className="bg-primary/90 backdrop-blur-sm text-primary-foreground border-border">
               <Tag className="w-3 h-3 mr-1" />
@@ -23,12 +23,13 @@ export function ProductCard({
           </div>}
       </CardHeader>
       <CardContent className="p-4 space-y-3">
-        {/* 产品名称和型号 */}
+        {/* 产品型号作为主要标题 */}
         <div>
-          <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-            {product.name}
-          </CardTitle>
-          {product.model && <p className="text-sm text-muted-foreground mt-1">{product.model}</p>}
+          {product.model && <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+              {product.model}
+            </CardTitle>}
+          {/* 简化描述作为副标题 */}
+          {product.short_description && <p className="text-sm text-muted-foreground mt-1">{product.short_description}</p>}
         </div>
 
         {/* 产品编号和供应商信息 */}
@@ -44,9 +45,9 @@ export function ProductCard({
         </div>
 
         {/* 产品描述 */}
-        <CardDescription className="text-muted-foreground line-clamp-2 text-sm">
-          {product.short_description || product.description}
-        </CardDescription>
+        {product.description && <CardDescription className="text-muted-foreground line-clamp-2 text-sm">
+            {product.description}
+          </CardDescription>}
 
         {/* 价格和操作按钮 */}
         <div className="flex items-center justify-between pt-2">

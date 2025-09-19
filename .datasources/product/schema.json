@@ -9,11 +9,6 @@
       "type": "String"
     },
     {
-      "name": "name",
-      "title": "产品名称",
-      "type": "String"
-    },
-    {
       "name": "supplier",
       "title": "厂商/供应商",
       "type": "String"

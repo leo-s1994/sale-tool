@@ -66,7 +66,6 @@ export function ProductForm({
   const form = useForm({
     defaultValues: product || {
       product_code: generateProductCode(),
-      name: '',
       supplier: '',
       category: '',
       model: '',
@@ -141,17 +140,6 @@ export function ProductForm({
               <FormMessage />
             </FormItem>} />
         
-        {/* 产品名称 */}
-        <FormField control={form.control} name="name" render={({
-        field
-      }) => <FormItem>
-              <FormLabel>产品名称</FormLabel>
-              <FormControl>
-                <Input placeholder="输入产品名称" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>} />
-        
         {/* 厂商/供应商 */}
         <FormField control={form.control} name="supplier" render={({
         field
@@ -164,7 +152,7 @@ export function ProductForm({
               <FormMessage />
             </FormItem>} />
         
-        {/* 产品分类 - 更新为下拉选择 */}
+        {/* 产品分类 */}
         <FormField control={form.control} name="category" render={({
         field
       }) => <FormItem>

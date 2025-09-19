@@ -3,7 +3,6 @@
   {
     "_id": "1",
     "product_code": "PROD-20240919-001",
-    "name": "高端服务器",
     "supplier": "戴尔科技",
     "category": "服务器设备",
     "model": "PowerEdge R750",
@@ -50,7 +49,6 @@
   {
     "_id": "2",
     "product_code": "PROD-20240919-002",
-    "name": "网络交换机",
     "supplier": "华为技术",
     "category": "网络设备",
     "model": "S5720-52X-EI-AC",
@@ -97,7 +95,6 @@
   {
     "_id": "3",
     "product_code": "PROD-20240919-003",
-    "name": "存储设备",
     "supplier": "群晖科技",
     "category": "存储设备",
     "model": "DS1821+",
@@ -144,7 +141,6 @@
   {
     "_id": "4",
     "product_code": "PROD-20240919-004",
-    "name": "无线AP",
     "supplier": "TP-Link",
     "category": "网络设备",
     "model": "EAP610",
@@ -187,7 +183,6 @@
   {
     "_id": "5",
     "product_code": "PROD-20240919-005",
-    "name": "备份软件",
     "supplier": "Veritas",
     "category": "软件",
     "model": "Backup Exec 22",

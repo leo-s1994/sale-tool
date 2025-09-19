@@ -10,7 +10,6 @@ const mockProducts = {
   1: {
     id: 1,
     product_code: 'PROD-1A2B3C4D',
-    name: '高端服务器',
     supplier: '戴尔科技',
     category: '服务器',
     model: 'PowerEdge R750',
@@ -26,7 +25,6 @@ const mockProducts = {
   2: {
     id: 2,
     product_code: 'PROD-2E3F4G5H',
-    name: '网络交换机',
     supplier: '华为',
     category: '网络设备',
     model: 'S5720-52X-EI-24S',
@@ -42,7 +40,6 @@ const mockProducts = {
   3: {
     id: 3,
     product_code: 'PROD-3I4J5K6L',
-    name: '存储设备',
     supplier: '群晖',
     category: '存储设备',
     model: 'DS1821+',
@@ -73,7 +70,7 @@ export default function ProductDetail(props) {
         pageId: 'pdfViewer',
         params: {
           pdfUrl: product.pdf_url,
-          productName: product.name
+          productModel: product.model
         }
       });
     } else {
@@ -106,8 +103,9 @@ export default function ProductDetail(props) {
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-foreground">{product.name}</h1>
-            {product.model && <p className="text-muted-foreground mt-1">{product.model}</p>}
+            {/* 使用产品型号作为主要标题 */}
+            <h1 className="text-2xl font-bold text-foreground">{product.model}</h1>
+            {product.short_description && <p className="text-muted-foreground mt-1">{product.short_description}</p>}
           </div>
           {product.product_code && <Badge variant="secondary" className="ml-auto">
               <Hash className="w-4 h-4 mr-1" />
@@ -121,7 +119,7 @@ export default function ProductDetail(props) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* 产品图片 */}
           <div className="space-y-4">
-            <img src={product.image} alt={product.name} className="w-full h-96 object-cover rounded-lg shadow-lg" />
+            <img src={product.image} alt={product.model || '产品图片'} className="w-full h-96 object-cover rounded-lg shadow-lg" />
             
             {/* 基础信息卡片 */}
             <div className="bg-card p-6 rounded-lg border border-border">
@@ -203,9 +201,9 @@ export default function ProductDetail(props) {
                 {product.related_products.map(relatedId => {
               const relatedProduct = mockProducts[relatedId];
               return relatedProduct ? <div key={relatedId} className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors">
-                        <h4 className="font-medium text-foreground">{relatedProduct.name}</h4>
-                        {relatedProduct.model && <p className="text-sm text-muted-foreground mt-1">{relatedProduct.model}</p>}
-                        {relatedProduct.short_description && <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{relatedProduct.short_description}</p>}
+                        <h4 className="font-medium text-foreground">{relatedProduct.model}</h4>
+                        {relatedProduct.short_description && <p className="text-sm text-muted-foreground mt-1">{relatedProduct.short_description}</p>}
+                        {relatedProduct.category && <p className="text-xs text-muted-foreground mt-2">{relatedProduct.category}</p>}
                       </div> : null;
             })}
               </div>
