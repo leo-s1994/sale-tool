@@ -94,11 +94,6 @@ export default function Home(props) {
       pageId: 'admin'
     });
   };
-  const goToAddProduct = () => {
-    $w.utils.navigateTo({
-      pageId: 'productForm'
-    });
-  };
   const handleTogglePrices = () => {
     if (showPrices) {
       // 如果已经显示价格，直接隐藏
@@ -132,10 +127,6 @@ export default function Home(props) {
             <Button variant="outline" onClick={goToAdmin}>
               <Settings className="w-4 h-4 mr-2" />
               后台管理
-            </Button>
-            <Button onClick={goToAddProduct}>
-              <Plus className="w-4 h-4 mr-2" />
-              添加产品
             </Button>
           </div>
         </div>
