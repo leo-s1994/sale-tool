@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { ImageUpload } from '@/components/ImageUpload';
 import { PDFUpload } from '@/components/PDFUpload';
 import { ModelAssociation } from '@/components/ModelAssociation';
+import { SupplierSelect } from '@/components/SupplierSelect';
 export function ProductForm({
   product,
   onSubmit,
@@ -17,27 +18,40 @@ export function ProductForm({
     toast
   } = useToast();
   const [existingModels, setExistingModels] = useState([]);
+  const [existingSuppliers, setExistingSuppliers] = useState([]);
 
-  // 模拟获取产品数据用于型号关联
+  // 模拟获取产品数据用于型号关联和供应商列表
   useEffect(() => {
     // 这里应该从API获取产品列表
     const mockProducts = [{
       id: '1',
       name: '高端服务器',
-      model: 'PowerEdge R750'
+      model: 'PowerEdge R750',
+      supplier: '戴尔科技'
     }, {
       id: '2',
       name: '网络交换机',
-      model: 'S5720-52X-EI-24S'
+      model: 'S5720-52X-EI-24S',
+      supplier: '华为'
     }, {
       id: '3',
       name: '存储设备',
-      model: 'DS1821+'
+      model: 'DS1821+',
+      supplier: '群晖'
+    }, {
+      id: '4',
+      name: '服务器配件',
+      model: 'MEM-16GB',
+      supplier: '金士顿'
     }];
 
     // 提取所有型号用于关联选择
     const models = mockProducts.map(p => p.model).filter(Boolean);
     setExistingModels(models);
+
+    // 提取所有供应商用于下拉选择
+    const suppliers = mockProducts.map(p => p.supplier).filter(Boolean);
+    setExistingSuppliers(suppliers);
   }, []);
   const form = useForm({
     defaultValues: product || {
@@ -73,6 +87,14 @@ export function ProductForm({
       // 转换价格为数字
       if (data.price) {
         data.price = Number(data.price);
+      }
+
+      // 保存供应商到本地存储（实际应该保存到数据库）
+      if (data.supplier && !existingSuppliers.includes(data.supplier)) {
+        const updatedSuppliers = [...existingSuppliers, data.supplier].sort();
+        setExistingSuppliers(updatedSuppliers);
+        // 这里应该调用API保存供应商到数据库
+        console.log('新供应商已添加:', data.supplier);
       }
       await onSubmit(data);
       toast({
@@ -112,14 +134,15 @@ export function ProductForm({
               <FormMessage />
             </FormItem>} />
         
-        {/* 厂商/供应商 */}
+        {/* 厂商/供应商 - 更新为下拉选择 */}
         <FormField control={form.control} name="supplier" render={({
         field
       }) => <FormItem>
               <FormLabel>厂商/供应商</FormLabel>
               <FormControl>
-                <Input placeholder="输入厂商或供应商名称" {...field} />
+                <SupplierSelect value={field.value} onChange={field.onChange} existingSuppliers={existingSuppliers} />
               </FormControl>
+              <FormDescription>选择现有供应商或输入新的供应商名称</FormDescription>
               <FormMessage />
             </FormItem>} />
         

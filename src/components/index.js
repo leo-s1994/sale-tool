@@ -5,3 +5,4 @@ export * from './ImageUpload.jsx';
 export * from './PDFUpload.jsx';
 export * from './ExcelImport.jsx';
 export * from './ModelAssociation.jsx';
+export * from './SupplierSelect.jsx';
