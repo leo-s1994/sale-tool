@@ -6,3 +6,4 @@ export * from './PDFUpload.jsx';
 export * from './ExcelImport.jsx';
 export * from './ModelAssociation.jsx';
 export * from './SupplierSelect.jsx';
+export * from './CategorySelect.jsx';

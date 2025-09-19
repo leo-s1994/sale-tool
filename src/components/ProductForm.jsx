@@ -9,6 +9,7 @@ import { ImageUpload } from '@/components/ImageUpload';
 import { PDFUpload } from '@/components/PDFUpload';
 import { ModelAssociation } from '@/components/ModelAssociation';
 import { SupplierSelect } from '@/components/SupplierSelect';
+import { CategorySelect } from '@/components/CategorySelect';
 export function ProductForm({
   product,
   onSubmit,
@@ -19,30 +20,35 @@ export function ProductForm({
   } = useToast();
   const [existingModels, setExistingModels] = useState([]);
   const [existingSuppliers, setExistingSuppliers] = useState([]);
+  const [existingCategories, setExistingCategories] = useState([]);
 
-  // 模拟获取产品数据用于型号关联和供应商列表
+  // 模拟获取产品数据用于型号关联、供应商和分类列表
   useEffect(() => {
     // 这里应该从API获取产品列表
     const mockProducts = [{
       id: '1',
       name: '高端服务器',
       model: 'PowerEdge R750',
-      supplier: '戴尔科技'
+      supplier: '戴尔科技',
+      category: '服务器'
     }, {
       id: '2',
       name: '网络交换机',
       model: 'S5720-52X-EI-24S',
-      supplier: '华为'
+      supplier: '华为',
+      category: '网络设备'
     }, {
       id: '3',
       name: '存储设备',
       model: 'DS1821+',
-      supplier: '群晖'
+      supplier: '群晖',
+      category: '存储设备'
     }, {
       id: '4',
       name: '服务器配件',
       model: 'MEM-16GB',
-      supplier: '金士顿'
+      supplier: '金士顿',
+      category: '配件'
     }];
 
     // 提取所有型号用于关联选择
@@ -52,6 +58,10 @@ export function ProductForm({
     // 提取所有供应商用于下拉选择
     const suppliers = mockProducts.map(p => p.supplier).filter(Boolean);
     setExistingSuppliers(suppliers);
+
+    // 提取所有分类用于下拉选择
+    const categories = mockProducts.map(p => p.category).filter(Boolean);
+    setExistingCategories(categories);
   }, []);
   const form = useForm({
     defaultValues: product || {
@@ -96,6 +106,14 @@ export function ProductForm({
         // 这里应该调用API保存供应商到数据库
         console.log('新供应商已添加:', data.supplier);
       }
+
+      // 保存分类到本地存储（实际应该保存到数据库）
+      if (data.category && !existingCategories.includes(data.category)) {
+        const updatedCategories = [...existingCategories, data.category].sort();
+        setExistingCategories(updatedCategories);
+        // 这里应该调用API保存分类到数据库
+        console.log('新产品分类已添加:', data.category);
+      }
       await onSubmit(data);
       toast({
         title: "操作成功",
@@ -134,7 +152,7 @@ export function ProductForm({
               <FormMessage />
             </FormItem>} />
         
-        {/* 厂商/供应商 - 更新为下拉选择 */}
+        {/* 厂商/供应商 */}
         <FormField control={form.control} name="supplier" render={({
         field
       }) => <FormItem>
@@ -146,26 +164,15 @@ export function ProductForm({
               <FormMessage />
             </FormItem>} />
         
-        {/* 产品分类 */}
+        {/* 产品分类 - 更新为下拉选择 */}
         <FormField control={form.control} name="category" render={({
         field
       }) => <FormItem>
               <FormLabel>产品分类</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="选择产品分类" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="服务器">服务器</SelectItem>
-                  <SelectItem value="网络设备">网络设备</SelectItem>
-                  <SelectItem value="存储设备">存储设备</SelectItem>
-                  <SelectItem value="软件">软件</SelectItem>
-                  <SelectItem value="配件">配件</SelectItem>
-                  <SelectItem value="其他">其他</SelectItem>
-                </SelectContent>
-              </Select>
+              <FormControl>
+                <CategorySelect value={field.value} onChange={field.onChange} existingCategories={existingCategories} />
+              </FormControl>
+              <FormDescription>选择现有分类或输入新的产品分类</FormDescription>
               <FormMessage />
             </FormItem>} />
         
