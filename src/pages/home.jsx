@@ -75,7 +75,8 @@ export default function Home(props) {
     $w.utils.navigateTo({
       pageId: 'productDetail',
       params: {
-        productId: product.id
+        productId: product.id,
+        showPrice: showPrices.toString() // 传递当前价格显示状态
       }
     });
   };

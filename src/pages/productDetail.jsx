@@ -65,6 +65,7 @@ export default function ProductDetail(props) {
     toast
   } = useToast();
   const productId = $w.page.dataset.params?.productId;
+  const showPrice = $w.page.dataset.params?.showPrice === 'true'; // 从参数获取价格显示状态
   const product = mockProducts[productId];
   const handleViewPDF = () => {
     if (product && product.pdf_url) {
@@ -154,7 +155,7 @@ export default function ProductDetail(props) {
             {/* 价格和描述 */}
             <div className="space-y-4">
               <div>
-                <h2 className="text-3xl font-bold text-primary">¥{product.price}</h2>
+                {showPrice ? <h2 className="text-3xl font-bold text-primary">¥{product.price}</h2> : <div className="h-10"></div>}
                 <p className="text-muted-foreground mt-2">{product.description}</p>
               </div>
 
