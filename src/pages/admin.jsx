@@ -137,8 +137,8 @@ export default function Admin(props) {
     setShowImport(!showImport);
   };
   return <div style={style} className="min-h-screen bg-background">
-      {/* 头部 */}
-      <div className="bg-card border-b border-border p-4">
+      {/* 头部 - 毛玻璃风格 */}
+      <div className="bg-background/80 backdrop-blur-md border-b border-border/50 p-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Button variant="ghost" onClick={handleBack} className="p-2">

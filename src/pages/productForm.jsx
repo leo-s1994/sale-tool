@@ -90,8 +90,8 @@ export default function ProductFormPage(props) {
     $w.utils.navigateBack();
   };
   return <div style={style} className="min-h-screen bg-background">
-      {/* 头部 */}
-      <div className="bg-card border-b border-border p-4">
+      {/* 头部 - 毛玻璃风格 */}
+      <div className="bg-background/80 backdrop-blur-md border-b border-border/50 p-4 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto flex items-center space-x-4">
           <Button variant="ghost" onClick={handleBack} className="p-2">
             <ArrowLeft className="w-5 h-5" />

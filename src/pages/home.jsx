@@ -116,8 +116,8 @@ export default function Home(props) {
     });
   };
   return <div style={style} className="min-h-screen bg-background">
-      {/* 头部搜索栏 */}
-      <div className="bg-card border-b border-border p-4 sticky top-0 z-10">
+      {/* 头部搜索栏 - 毛玻璃风格 */}
+      <div className="bg-background/80 backdrop-blur-md border-b border-border/50 p-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <h1 className="text-2xl font-bold text-foreground">销售工具</h1>
           <div className="flex items-center space-x-4">
