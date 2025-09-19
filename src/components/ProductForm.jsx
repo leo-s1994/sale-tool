@@ -7,6 +7,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { useForm } from 'react-hook-form';
 import { ImageUpload } from '@/components/ImageUpload';
 import { PDFUpload } from '@/components/PDFUpload';
+import { ModelAssociation } from '@/components/ModelAssociation';
 export function ProductForm({
   product,
   onSubmit,
@@ -18,21 +19,29 @@ export function ProductForm({
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [productNote, setProductNote] = useState('');
+  const [existingModels, setExistingModels] = useState([]);
 
   // 模拟获取关联产品数据
   useEffect(() => {
     // 这里应该从API获取产品列表
     const mockProducts = [{
       id: '1',
-      name: '高端服务器'
+      name: '高端服务器',
+      model: 'PowerEdge R750'
     }, {
       id: '2',
-      name: '网络交换机'
+      name: '网络交换机',
+      model: 'S5720-52X-EI-24S'
     }, {
       id: '3',
-      name: '存储设备'
+      name: '存储设备',
+      model: 'DS1821+'
     }];
     setRelatedProducts(mockProducts);
+
+    // 提取所有型号用于关联选择
+    const models = mockProducts.map(p => p.model).filter(Boolean);
+    setExistingModels(models);
   }, []);
   const form = useForm({
     defaultValues: product || {
@@ -48,7 +57,8 @@ export function ProductForm({
       pdf_url: '',
       specifications: [],
       notes: '',
-      related_products: []
+      related_products: [],
+      model_associations: []
     }
   });
 
@@ -185,6 +195,20 @@ export function ProductForm({
               <FormControl>
                 <Input placeholder="输入产品型号" {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>} />
+        
+        {/* 型号关联功能 */}
+        <FormField control={form.control} name="model_associations" render={({
+        field
+      }) => <FormItem>
+              <FormLabel>型号关联</FormLabel>
+              <FormControl>
+                <ModelAssociation value={field.value} onChange={field.onChange} existingModels={existingModels} />
+              </FormControl>
+              <FormDescription>
+                关联其他相关产品型号，可以为每个关联型号添加备注信息
+              </FormDescription>
               <FormMessage />
             </FormItem>} />
         

@@ -83,6 +83,24 @@
           }
         }
       }
+    },
+    {
+      "name": "model_associations",
+      "title": "型号关联",
+      "type": "Array",
+      "items": {
+        "type": "Object",
+        "properties": {
+          "model": {
+            "type": "String",
+            "title": "关联型号"
+          },
+          "note": {
+            "type": "String",
+            "title": "关联备注"
+          }
+        }
+      }
     }
   ]
 }

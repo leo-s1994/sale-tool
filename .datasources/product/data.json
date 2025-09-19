@@ -31,6 +31,16 @@
         "note": "建议使用此存储设备进行数据备份"
       }
     ],
+    "model_associations": [
+      {
+        "model": "PowerEdge R740",
+        "note": "上一代型号，可兼容升级"
+      },
+      {
+        "model": "PowerEdge R760",
+        "note": "新一代型号，性能更优"
+      }
+    ],
     "createdAt": 1726742400000,
     "updatedAt": 1726742400000,
     "owner": "system",
@@ -66,6 +76,16 @@
       {
         "productId": "4",
         "note": "可为此交换机连接无线AP"
+      }
+    ],
+    "model_associations": [
+      {
+        "model": "S5720-28X-EI-AC",
+        "note": "28口版本，适合小型网络"
+      },
+      {
+        "model": "S5730-48G-EI-AC",
+        "note": "48口版本，扩展性更强"
       }
     ],
     "createdAt": 1726742400000,
@@ -105,6 +125,16 @@
         "note": "建议使用此备份软件进行数据保护"
       }
     ],
+    "model_associations": [
+      {
+        "model": "DS1621+",
+        "note": "6盘位版本，适合中小型企业"
+      },
+      {
+        "model": "DS2422+",
+        "note": "12盘位版本，扩展性更强"
+      }
+    ],
     "createdAt": 1726742400000,
     "updatedAt": 1726742400000,
     "owner": "system",
@@ -138,6 +168,16 @@
         "note": "需要此交换机提供PoE供电"
       }
     ],
+    "model_associations": [
+      {
+        "model": "EAP615-Wall",
+        "note": "壁挂式版本，适合会议室"
+      },
+      {
+        "model": "EAP653",
+        "note": "Wi-Fi 6E版本，支持6GHz频段"
+      }
+    ],
     "createdAt": 1726742400000,
     "updatedAt": 1726742400000,
     "owner": "system",
@@ -169,6 +209,16 @@
       {
         "productId": "3",
         "note": "适合备份此存储设备中的数据"
+      }
+    ],
+    "model_associations": [
+      {
+        "model": "Backup Exec 21",
+        "note": "上一代版本，功能稳定"
+      },
+      {
+        "model": "NetBackup 10",
+        "note": "企业级版本，功能更强大"
       }
     ],
     "createdAt": 1726742400000,
