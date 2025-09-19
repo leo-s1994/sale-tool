@@ -124,9 +124,9 @@ export default function Home(props) {
             <Button variant="ghost" size="icon" onClick={handleTogglePrices} className="h-9 w-9 p-0 text-muted-foreground hover:text-foreground" title={showPrices ? '隐藏价格' : '显示价格'}>
               {showPrices ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </Button>
-            <Button variant="outline" onClick={goToAdmin}>
-              <Settings className="w-4 h-4 mr-2" />
-              后台管理
+            {/* 后台管理按钮 - 调整为与显示价格相同的样式 */}
+            <Button variant="ghost" size="icon" onClick={goToAdmin} className="h-9 w-9 p-0 text-muted-foreground hover:text-foreground" title="后台管理">
+              <Settings className="w-4 h-4" />
             </Button>
           </div>
         </div>
